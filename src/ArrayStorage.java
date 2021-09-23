@@ -6,10 +6,11 @@ import java.util.Arrays;
 
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int size;
+    private int size = 0;
 
     void clear() {
         Arrays.fill(storage, 0, size(),null);
+        size = 0;
     }
 
     void save(Resume resume) {
@@ -18,7 +19,7 @@ public class ArrayStorage {
                 storage[i] = resume;
                 break;
             }
-        }
+        } size++;
     }
 
     Resume get(String uuid) {
@@ -39,23 +40,17 @@ public class ArrayStorage {
                     storage[j + 1].uuid = null;
                 }
             }
-        }
+        } size--;
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, size());
+        return Arrays.copyOf(storage, size);
     }
 
     int size() {
-        size = 0;
-        for (Resume resume : storage) {
-            if (resume != null) {
-                size++;
-            }
-        }
         return size;
     }
 }
