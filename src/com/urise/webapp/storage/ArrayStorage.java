@@ -16,38 +16,59 @@ public class ArrayStorage {
     }
 
     public void upDate(Resume resume) {
-        for (int i = 0; i < size; i++) {
-            if (resume.equals(storage[i])) {
-                storage[i] = resume;
-                System.out.println("Update " + resume + " is completed.");
-                break;
+        if (uuidPresent(resume.getUuid())) {
+            for (int i = 0; i < size; i++) {
+                if (resume.equals(storage[i])) {
+                    storage[i] = resume;
+                    System.out.println("Update " + resume + " is completed.");
+                    break;
+                }
             }
+        } else {
+            System.out.println("Резюме " + resume.getUuid() + " не существует.");
         }
     }
 
     public void save(Resume resume) {
-        storage[size] = resume;
-        size++;
+        if (size == storage.length) {
+            System.out.println("База данных резюме заполнена.");
+            System.out.println("Для продолжения удалите одно из резюме");
+        }
+        if (uuidPresent(resume.getUuid())) {
+            System.out.println("Резюме " + resume.getUuid() + " уже существует.");
+        } else {
+            storage[size] = resume;
+            System.out.println("Резюме " + resume.getUuid() + " создано.");
+            size++;
+        }
     }
 
     public Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                return storage[i];
+        if (uuidPresent(uuid)) {
+            for (int i = 0; i < size; i++) {
+                if (uuid.equals(storage[i].getUuid())) {
+                    return storage[i];
+                }
             }
         }
         return null;
     }
 
     public void delete(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (uuid.equals(storage[i].getUuid())) {
-                for (int j = i; j < size - 1; j++) {
-                    storage[j] = storage[j + 1];
+        if (uuidPresent(uuid)) {
+            for (int i = 0; i < size; i++) {
+                if (uuid.equals(storage[i].getUuid())) {
+                    for (int j = i; j < size - 1; j++) {
+                        storage[j] = storage[j + 1];
+                    }
                 }
             }
+            System.out.println("Резюме " + uuid + " удалено!");
+            size--;
+        } else {
+            System.out.println("Резюме " + uuid + " не найдено.");
         }
-        size--;
+
     }
 
     /**
@@ -59,5 +80,14 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    public boolean uuidPresent(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
