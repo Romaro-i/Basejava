@@ -16,46 +16,44 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        int j = uuidPresent(resume.getUuid());
-        if (j == -1) {
+        int index = findIndex(resume.getUuid());
+        if (index == -1) {
             System.out.println("Резюме " + resume.getUuid() + " не найдено.");
-        } else if (storage[j].equals(resume)) {
-            storage[j] = resume;
-            System.out.println("Update " + resume + " is completed.");
         } else {
-            System.out.println("Резюме " + resume.getUuid() + " не найдено.");
+            storage[index] = resume;
+            System.out.println("Update " + resume + " is completed.");
         }
     }
 
     public void save(Resume resume) {
-        int j = uuidPresent(resume.getUuid());
+        int index = findIndex(resume.getUuid());
         if (size == storage.length) {
             System.out.println("База данных резюме заполнена.");
             System.out.println("Для продолжения удалите одно из резюме");
-        } else if (j == -1 || j == size) {
+        } else if (index == -1) {
             storage[size] = resume;
-            System.out.println("Резюме " + resume.getUuid() + " создано.");
+            System.out.println("Резюме " + resume.getUuid() + " сохранено.");
             size++;
-        } else if (storage[j].equals(resume)) {
+        } else {
             System.out.println("Резюме " + resume.getUuid() + " уже существует.");
 
         }
     }
 
     public Resume get(String uuid) {
-        int j = uuidPresent(uuid);
-        if (j == -1 || j == size) {
+        int index = findIndex(uuid);
+        if (index == -1) {
             System.out.println("Резюме " + uuid + " не найдено.");
-        } else if (storage[j].getUuid().equals(uuid)) {
-            return storage[j];
+        } else {
+            return storage[index];
         }
         return null;
     }
 
     public void delete(String uuid) {
-        int j = uuidPresent(uuid);
-        if (storage[j].getUuid().equals(uuid)) {
-            storage[j] = storage[size - 1];
+        int index = findIndex(uuid);
+        if (storage[index].getUuid().equals(uuid)) {
+            storage[index] = storage[size - 1];
             System.out.println("Резюме " + uuid + " удалено!");
             size--;
         } else {
@@ -74,7 +72,7 @@ public class ArrayStorage {
         return size;
     }
 
-    public int uuidPresent(String uuid) {
+    public int findIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;
