@@ -21,7 +21,7 @@ public class ArrayStorage {
             System.out.println("Резюме " + resume.getUuid() + " не найдено.");
         } else {
             storage[index] = resume;
-            System.out.println("Update " + resume + " is completed.");
+            System.out.println("Update " + resume.getUuid() + " is completed.");
         }
     }
 
@@ -44,21 +44,16 @@ public class ArrayStorage {
         int index = findIndex(uuid);
         if (index == -1) {
             System.out.println("Резюме " + uuid + " не найдено.");
-        } else {
-            return storage[index];
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
         int index = findIndex(uuid);
-        if (storage[index].getUuid().equals(uuid)) {
-            storage[index] = storage[size - 1];
-            System.out.println("Резюме " + uuid + " удалено!");
-            size--;
-        } else {
-            System.out.println("Резюме " + uuid + " не найдено.");
-        }
+        storage[index] = storage[size - 1];
+        System.out.println("Резюме " + uuid + " удалено!");
+        size--;
     }
 
     /**
@@ -72,7 +67,7 @@ public class ArrayStorage {
         return size;
     }
 
-    public int findIndex(String uuid) {
+    private int findIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {
                 return i;
