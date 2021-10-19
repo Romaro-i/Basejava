@@ -51,9 +51,13 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int index = findIndex(uuid);
-        storage[index] = storage[size - 1];
-        System.out.println("Резюме " + uuid + " удалено!");
-        size--;
+        if (index == -1) {
+            System.out.println("Резюме " + uuid + " не найдено.");
+        } else {
+            storage[index] = storage[size - 1];
+            System.out.println("Резюме " + uuid + " удалено!");
+            size--;
+        }
     }
 
     /**
