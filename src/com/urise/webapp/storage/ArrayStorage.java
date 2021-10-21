@@ -6,8 +6,9 @@ import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
 
-public class ArrayStorage {
-    private final Resume[] storage = new Resume[10_000];
+public class ArrayStorage implements Storage {
+    public static final int STORAGE_LIMIT = 10_000;
+    private final Resume[] storage = new Resume[STORAGE_LIMIT];
     private int size = 0;
 
     public void clear() {
@@ -18,7 +19,7 @@ public class ArrayStorage {
     public void update(Resume resume) {
         int index = findIndex(resume.getUuid());
         if (index == -1) {
-            System.out.println("Резюме " + resume.getUuid() + " не найдено.");
+            System.out.println("Resume " + resume.getUuid() + " not exist.");
         } else {
             storage[index] = resume;
             System.out.println("Update " + resume.getUuid() + " is completed.");
@@ -27,15 +28,14 @@ public class ArrayStorage {
 
     public void save(Resume resume) {
         int index = findIndex(resume.getUuid());
-        if (size == storage.length) {
-            System.out.println("База данных резюме заполнена.");
-            System.out.println("Для продолжения удалите одно из резюме");
+        if (size == STORAGE_LIMIT) {
+            System.out.println("Storage overflow.");
         } else if (index == -1) {
             storage[size] = resume;
-            System.out.println("Резюме " + resume.getUuid() + " сохранено.");
+            System.out.println("Resume " + resume.getUuid() + " not exist.");
             size++;
         } else {
-            System.out.println("Резюме " + resume.getUuid() + " уже существует.");
+            System.out.println("Resume " + resume.getUuid() + " already exist.");
 
         }
     }
@@ -43,7 +43,7 @@ public class ArrayStorage {
     public Resume get(String uuid) {
         int index = findIndex(uuid);
         if (index == -1) {
-            System.out.println("Резюме " + uuid + " не найдено.");
+            System.out.println("Resume " + uuid + " not exist.");
             return null;
         }
         return storage[index];
@@ -52,10 +52,10 @@ public class ArrayStorage {
     public void delete(String uuid) {
         int index = findIndex(uuid);
         if (index == -1) {
-            System.out.println("Резюме " + uuid + " не найдено.");
+            System.out.println("Resume " + uuid + " not exist.");
         } else {
             storage[index] = storage[size - 1];
-            System.out.println("Резюме " + uuid + " удалено!");
+            System.out.println("Resume " + uuid + " is deleted.");
             size--;
         }
     }
