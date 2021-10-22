@@ -5,9 +5,6 @@ package com.urise.webapp.storage;/*
 import com.urise.webapp.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
-    protected static final int STORAGE_LIMIT = 10_000;
-    protected final Resume[] storage = new Resume[STORAGE_LIMIT];
-    protected int size = 0;
 
     @Override
     protected int getIndex(String uuid) {
@@ -20,7 +17,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void changeIndex(int index) {
+    protected void deleteResume(int index) {
         storage[index] = storage[size - 1];
     }
 
