@@ -23,4 +23,9 @@ public class ArrayStorage extends AbstractArrayStorage {
     protected void changeIndex(int index) {
         storage[index] = storage[size - 1];
     }
+
+    @Override
+    protected void saveIndex(Resume resume) {
+        storage[size] = resume;
+    }
 }
