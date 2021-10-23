@@ -9,7 +9,8 @@ public class SortArrayStorage extends AbstractArrayStorage {
     @Override
     protected int getIndex(String uuid) {
         Resume searchKey = new Resume();
-        return Arrays.binarySearch(storage, 0, size(), searchKey);
+        searchKey.setUuid(uuid);
+        return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 
     @Override
@@ -21,7 +22,9 @@ public class SortArrayStorage extends AbstractArrayStorage {
     }
 
     @Override
-    protected void saveIndex(Resume resume) {
-
+    protected void saveResume(Resume resume, int index) {
+        index = (index * -1) - 1;
+        if (size - index >= 0) System.arraycopy(storage, index, storage, index + 1, size - index);
+        storage[index] = resume;
     }
 }
