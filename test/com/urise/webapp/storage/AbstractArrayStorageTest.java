@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public abstract class AbstractArrayStorageTest {
     private Storage storage = new ArrayStorage();
     private static String UUID_1 = "uuid1";
@@ -41,7 +39,9 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void update() {
-        Assert.assertEquals(UUID_1, UUID_1);
+        Resume updateResume = new Resume(UUID_1);
+        storage.update(updateResume);
+        Assert.assertEquals(updateResume, storage.get(UUID_1));
         System.out.println("UPDATE - ОТРАБОТАЛ!");
     }
 
