@@ -19,16 +19,6 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            storage[index] = resume;
-            System.out.println("Update " + resume.getUuid() + " completed.");
-        }
-    }
-
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (size == STORAGE_LIMIT) {
@@ -39,6 +29,16 @@ public abstract class AbstractArrayStorage implements Storage {
             size++;
         } else {
             System.out.println("Resume " + resume.getUuid() + " already exist.");
+        }
+    }
+
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            storage[index] = resume;
+            System.out.println("Update " + resume.getUuid() + " completed.");
         }
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
-            throw new ExistStorageException(uuid);
+            throw new NotExistStorageException(uuid);
         } else {
             deleteResume(index);
             System.out.println("Resume " + uuid + " deleted.");
