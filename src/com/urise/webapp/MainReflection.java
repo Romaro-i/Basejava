@@ -23,7 +23,6 @@ public class MainReflection {
         }
 
         Method method = r.getClass().getDeclaredMethod("toString");
-        method.invoke(r);
-        System.out.println(r);
+        System.out.println(method.invoke(r));
     }
 }
