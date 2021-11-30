@@ -69,6 +69,21 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = NotExistStorageException.class)
+    public void getNotExist() {
+        storage.get("dummy");
+    }
+
+    @Test
+    public void getAll() {
+        Resume[] storage1 = new Resume[storage.size()];
+        storage1[0] = new Resume("uuid1");
+        storage1[1] = new Resume("uuid2");
+        storage1[2] = new Resume("uuid3");
+        Assert.assertArrayEquals(storage1, storage.getAll());
+        Assert.assertEquals(3, storage1.length);
+    }
+
+    @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete(UUID_1);
         Assert.assertEquals(2, storage.size());
@@ -82,23 +97,8 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test
-    public void getAll() {
-        Resume[] storage1 = new Resume[storage.size()];
-        storage1[0] = new Resume("uuid1");
-        storage1[1] = new Resume("uuid2");
-        storage1[2] = new Resume("uuid3");
-        Assert.assertArrayEquals(storage1, storage.getAll());
-        Assert.assertEquals(3, storage1.length);
-    }
-
-    @Test
     public void size() {
         Assert.assertEquals(3, storage.size());
-    }
-
-    @Test(expected = NotExistStorageException.class)
-    public void getNotExist() {
-        storage.get("dummy");
     }
 
     @Test(expected = StorageException.class)
