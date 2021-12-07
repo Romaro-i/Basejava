@@ -46,11 +46,4 @@ public class ListStorage extends AbstractStorage {
         return storage.size();
     }
 
-    protected int getIndex(String uuid) {
-        for (int i = 0; i < size(); i++) {
-            if (storage.get(i).equals(uuid))
-                return i;
-        }
-        return -1;
-    }
 }

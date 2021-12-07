@@ -17,6 +17,4 @@ public abstract class AbstractStorage implements Storage {
     public abstract Resume[] getAll();
 
     public abstract int size();
-
-    protected abstract int getIndex(String uuid);
 }
