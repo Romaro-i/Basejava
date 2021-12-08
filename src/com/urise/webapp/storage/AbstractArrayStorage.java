@@ -49,6 +49,10 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return storage[index];
     }
 
+    public Resume[] getAll() {
+        return Arrays.copyOf(storage, size);
+    }
+
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
@@ -59,12 +63,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size--;
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
-
     public int size() {
-        return size;
+        return super.size;
     }
 
     protected abstract void deleteResume(int index);
