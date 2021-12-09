@@ -54,17 +54,14 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
+        int index = checkIndex(uuid);
         deleteResume(index);
         System.out.println("Resume " + uuid + " deleted.");
         size--;
     }
 
     public int size() {
-        return super.size;
+        return size;
     }
 
     protected abstract void deleteResume(int index);

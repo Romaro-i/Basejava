@@ -41,7 +41,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void delete(String uuid) {
-        int index = getIndex(uuid);
+        int index = checkIndex(uuid);
         storage.remove(index);
     }
 
