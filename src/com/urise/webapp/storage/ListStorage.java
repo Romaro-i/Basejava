@@ -27,10 +27,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
+        int index = checkIndex(uuid);
         return storage.get(index);
     }
 

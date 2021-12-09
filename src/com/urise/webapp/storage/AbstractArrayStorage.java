@@ -33,19 +33,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        }
+        int index = checkIndex(resume.getUuid());
         storage[index] = resume;
         System.out.println("Update " + resume.getUuid() + " completed.");
     }
 
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
+        int index = checkIndex(uuid);
         return storage[index];
     }
 
