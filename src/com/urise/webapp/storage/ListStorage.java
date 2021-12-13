@@ -19,7 +19,7 @@ public class ListStorage extends AbstractStorage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
-            storage.add(resume);
+            saveResume(resume, index);
         } else {
             throw new NotExistStorageException(resume.getUuid());
         }
@@ -52,7 +52,7 @@ public class ListStorage extends AbstractStorage {
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         } else {
-            storage.remove(index);
+            deleteResume(index);
         }
     }
 
@@ -73,9 +73,11 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void deleteResume(int index) {
+        storage.remove(index);
     }
 
     @Override
     protected void saveResume(Resume resume, int index) {
+        storage.add(resume);
     }
 }
