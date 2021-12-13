@@ -3,7 +3,6 @@ package com.urise.webapp.storage;/*
  */
 
 import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
@@ -33,13 +32,13 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void update(Resume resume) {
-        int index = checkIndex(resume.getUuid());
+        int index = getIndex(resume.getUuid());
         storage[index] = resume;
         System.out.println("Update " + resume.getUuid() + " completed.");
     }
 
     public Resume get(String uuid) {
-        int index = checkIndex(uuid);
+        int index = getIndex(uuid);
         return storage[index];
     }
 
@@ -48,7 +47,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void delete(String uuid) {
-        int index = checkIndex(uuid);
+        int index = getIndex(uuid);
         deleteResume(index);
         System.out.println("Resume " + uuid + " deleted.");
         size--;
@@ -57,8 +56,4 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public int size() {
         return size;
     }
-
-    protected abstract void deleteResume(int index);
-
-    protected abstract void saveResume(Resume resume, int index);
 }

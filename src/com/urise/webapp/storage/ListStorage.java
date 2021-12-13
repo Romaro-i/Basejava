@@ -17,17 +17,27 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void save(Resume resume) {
-        storage.add(resume);
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            storage.add(resume);
+        } else {
+            throw new NotExistStorageException(resume.getUuid());
+        }
     }
 
     @Override
     public void update(Resume resume) {
-        storage.set(storage.indexOf(resume), resume);
+        int index = getIndex(resume.getUuid());
+        if (index < 0) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            storage.set(storage.indexOf(resume), resume);
+        }
     }
 
     @Override
     public Resume get(String uuid) {
-        int index = checkIndex(uuid);
+        int index = getIndex(uuid);
         return storage.get(index);
     }
 
@@ -38,8 +48,12 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void delete(String uuid) {
-        int index = checkIndex(uuid);
-        storage.remove(index);
+        int index = getIndex(uuid);
+        if (index < 0) {
+            throw new NotExistStorageException(uuid);
+        } else {
+            storage.remove(index);
+        }
     }
 
     @Override
@@ -49,11 +63,19 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < storage.size(); i++) {
             if (uuid.equals(storage.get(i).getUuid())) {
-                return i;
+                return storage.indexOf(storage.get(i));
             }
         }
         return -1;
+    }
+
+    @Override
+    protected void deleteResume(int index) {
+    }
+
+    @Override
+    protected void saveResume(Resume resume, int index) {
     }
 }
