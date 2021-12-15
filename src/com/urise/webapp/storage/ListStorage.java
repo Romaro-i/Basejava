@@ -2,13 +2,11 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
-
 import java.util.*;
 
 public class ListStorage extends AbstractStorage {
 
     private final List<Resume> storage = new ArrayList<>();
-
 
     @Override
     public void clear() {
@@ -16,13 +14,8 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            saveResume(resume, index);
-        } else {
-            throw new NotExistStorageException(resume.getUuid());
-        }
+    public void saveResume(Resume resume, int index) {
+        storage.add(resume);
     }
 
     @Override
@@ -32,6 +25,7 @@ public class ListStorage extends AbstractStorage {
             throw new NotExistStorageException(resume.getUuid());
         } else {
             storage.set(storage.indexOf(resume), resume);
+            System.out.println("Update " + resume.getUuid() + " completed.");
         }
     }
 
@@ -68,7 +62,7 @@ public class ListStorage extends AbstractStorage {
     protected int getIndex(String uuid) {
         for (int i = 0; i < storage.size(); i++) {
             if (uuid.equals(storage.get(i).getUuid())) {
-                return storage.indexOf(storage.get(i));
+                return i;
             }
         }
         return -1;
@@ -77,10 +71,6 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected void deleteResume(int index) {
         storage.remove(index);
-    }
-
-    @Override
-    protected void saveResume(Resume resume, int index) {
-        storage.add(resume);
+        System.out.println("Resume deleted.");
     }
 }
