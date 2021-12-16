@@ -2,8 +2,7 @@ package com.urise.webapp.storage;/*
  * Array based storage for Resumes
  */
 
-import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
+
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import java.util.Arrays;
@@ -13,6 +12,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
+    protected abstract void saveResume111(Resume resume, int index);
+    protected abstract void deleteResume1(int index);
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -28,20 +29,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         }
     }
 
-    public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        }
+    public void updateResume(Resume resume, int index) {
         storage[index] = resume;
-        System.out.println("Update " + resume.getUuid() + " completed.");
     }
 
-    public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
+    public Resume getResume(int index) {
         return storage[index];
     }
 
@@ -49,19 +41,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return Arrays.copyOf(storage, size);
     }
 
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        deleteResume(index);
-        System.out.println("Resume " + uuid + " deleted.");
+    public void deleteResume(int index) {
+        deleteResume1(index);
         size--;
     }
 
     public int size() {
         return size;
     }
-
-    protected abstract void saveResume111(Resume resume, int index);
 }
