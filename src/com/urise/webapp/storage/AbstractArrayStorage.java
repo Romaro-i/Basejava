@@ -5,6 +5,7 @@ package com.urise.webapp.storage;/*
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
+
 import java.util.Arrays;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
@@ -12,8 +13,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    protected abstract void saveResume111(Resume resume, int index);
-    protected abstract void deleteResume1(int index);
+    protected abstract void saveResumeStorage(Resume resume, int index);
+
+    protected abstract void deleteResumeStorage(int index);
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -23,10 +25,9 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public void saveResume(Resume resume, int index) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow.", resume.getUuid());
-        } else {
-            saveResume111(resume, index);
-            size++;
         }
+        saveResumeStorage(resume, index);
+            size++;
     }
 
     public void updateResume(Resume resume, int index) {
@@ -42,7 +43,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public void deleteResume(int index) {
-        deleteResume1(index);
+        deleteResumeStorage(index);
         size--;
     }
 
