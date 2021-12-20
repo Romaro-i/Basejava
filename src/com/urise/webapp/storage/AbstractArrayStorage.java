@@ -27,7 +27,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             throw new StorageException("Storage overflow.", resume.getUuid());
         }
         saveResumeStorage(resume, index);
-            size++;
+        size++;
     }
 
     public void updateResume(Resume resume, int index) {
