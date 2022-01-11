@@ -5,7 +5,6 @@ import com.urise.webapp.model.Resume;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class MapStorage extends AbstractStorage {
 
     private final Map<String, Resume> storage = new HashMap<>();
@@ -16,7 +15,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void saveResume(Resume resume, int index) {
+    protected void saveResume(Resume resume, Object key) {
         storage.put(resume.getUuid(), resume);
     }
 
@@ -46,12 +45,12 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected int searchKey(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (uuid.equals(storage.get(i).getUuid())) {
-                return i;
-            }
-        }
-        return -1;
+    protected Object searchKey(String uuid) {
+        return storage.get(uuid);
+    }
+
+    @Override
+    protected boolean existResume(Object key) {
+        return storage.isEmpty();
     }
 }

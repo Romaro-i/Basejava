@@ -14,7 +14,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public void saveResume(Resume resume, int index) {
+    public void saveResume(Resume resume, Object key) {
         storage.add(resume);
     }
 
@@ -44,12 +44,17 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected int searchKey(String uuid) {
+    protected Object searchKey(String uuid) {
         for (int i = 0; i < storage.size(); i++) {
             if (uuid.equals(storage.get(i).getUuid())) {
                 return i;
             }
         }
         return -1;
+    }
+
+    @Override
+    protected boolean existResume(Object key) {
+        return (Integer) key >= 0;
     }
 }

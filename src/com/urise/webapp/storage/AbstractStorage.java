@@ -5,7 +5,7 @@ import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
-    protected abstract void saveResume(Resume resume, int index);
+    protected abstract void saveResume(Resume resume, Object key);
 
     protected abstract void updateResume(Resume resume, int index);
 
@@ -13,19 +13,21 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void deleteResume(int index);
 
-    protected abstract int searchKey(String uuid);
+    protected abstract Object searchKey(String uuid);
+
+    protected abstract boolean existResume(Object key);
 
     public void save(Resume resume) {
-        int index = searchKey(resume.getUuid());
-        if (index >= 0) {
+        Object key = searchKey(resume.getUuid());
+        if (existResume(key)) {
             throw new ExistStorageException(resume.getUuid());
         }
-        saveResume(resume, index);
+        saveResume(resume, key);
         System.out.println("Resume " + resume.getUuid() + "  created.");
     }
 
     public void update(Resume resume) {
-        int index = searchKey(resume.getUuid());
+        int index = (int) searchKey(resume.getUuid());
         if (index < 0) {
             throw new NotExistStorageException(resume.getUuid());
         }
@@ -34,7 +36,7 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public Resume get(String uuid) {
-        int index = searchKey(uuid);
+        int index = (int) searchKey(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
@@ -42,7 +44,7 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void delete(String uuid) {
-        int index = searchKey(uuid);
+        int index = (int) searchKey(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
