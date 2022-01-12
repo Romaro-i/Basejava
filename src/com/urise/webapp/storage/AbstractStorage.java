@@ -9,7 +9,7 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract void updateResume(Resume resume, int index);
 
-    protected abstract Resume getResume(int index);
+    protected abstract Resume getResume(String key);
 
     protected abstract void deleteResume(int index);
 
@@ -36,11 +36,11 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public Resume get(String uuid) {
-        int index = (int) searchKey(uuid);
-        if (index < 0) {
+        Object key = searchKey(uuid);
+        if (!existResume(key)) {
             throw new NotExistStorageException(uuid);
         }
-        return getResume(index);
+        return getResume((String) key);
     }
 
     public void delete(String uuid) {

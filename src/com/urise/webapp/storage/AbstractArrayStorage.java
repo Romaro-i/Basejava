@@ -2,7 +2,6 @@ package com.urise.webapp.storage;/*
  * Array based storage for Resumes
  */
 
-
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
@@ -34,8 +33,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[index] = resume;
     }
 
-    public Resume getResume(int index) {
-        return storage[index];
+    public Resume getResume(String key) {
+        return storage[Integer.parseInt(key)];
     }
 
     public Resume[] getAll() {

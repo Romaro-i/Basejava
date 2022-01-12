@@ -24,8 +24,8 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume getResume(int index) {
-        return storage.get(index);
+    public Resume getResume(String key) {
+        return storage.get(Integer.parseInt(key));
     }
 
     @Override
