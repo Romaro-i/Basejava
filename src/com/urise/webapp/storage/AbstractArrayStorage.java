@@ -33,8 +33,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[index] = resume;
     }
 
-    public Resume getResume(String key) {
-        return storage[Integer.parseInt(key)];
+    public Resume getResume(Object key) {
+        return storage[(int) key];
     }
 
     public Resume[] getAll() {
