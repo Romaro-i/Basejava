@@ -20,7 +20,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume, int index) {
+    protected void updateResume(Resume resume, int key) {
         storage.put(resume.getUuid(), resume);
     }
 
@@ -35,8 +35,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void deleteResume(int index) {
-        storage.remove(Integer.toString(index));
+    protected void deleteResume(int key) {
+        storage.remove(Integer.toString(key));
     }
 
     @Override
