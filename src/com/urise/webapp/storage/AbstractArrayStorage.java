@@ -29,8 +29,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size++;
     }
 
-    public void updateResume(Resume resume, int key) {
-        storage[key] = resume;
+    public void updateResume(Resume resume, Object key) {
+        storage[(int) key] = resume;
     }
 
     public Resume getResume(Object key) {
@@ -41,8 +41,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return Arrays.copyOf(storage, size);
     }
 
-    public void deleteResume(int key) {
-        deleteFromStorage(key);
+    public void deleteResume(Object key) {
+        deleteFromStorage((Integer) key);
         size--;
     }
 

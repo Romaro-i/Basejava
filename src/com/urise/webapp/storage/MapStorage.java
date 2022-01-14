@@ -1,7 +1,6 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void updateResume(Resume resume, int key) {
+    protected void updateResume(Resume resume, Object key) {
         storage.put(resume.getUuid(), resume);
     }
 
@@ -35,8 +34,8 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected void deleteResume(int key) {
-        storage.remove(Integer.toString(key));
+    protected void deleteResume(Object key) {
+        storage.remove(key);
     }
 
     @Override
@@ -51,6 +50,6 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean existResume(Object key) {
-        return storage.isEmpty();
+        return storage.containsKey(key);
     }
 }
