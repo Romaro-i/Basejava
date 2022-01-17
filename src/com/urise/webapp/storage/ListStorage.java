@@ -33,7 +33,6 @@ public class ListStorage extends AbstractStorage {
         return storage.toArray(new Resume[0]);
     }
 
-
     public void deleteResume(Object key) {
         storage.remove(key);
     }

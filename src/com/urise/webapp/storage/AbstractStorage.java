@@ -18,40 +18,40 @@ public abstract class AbstractStorage implements Storage {
     protected abstract boolean existResume(Object key);
 
     public void save(Resume resume) {
-        Object key = getExistResume(resume.getUuid());
+        Object key = getNotExistResume(resume.getUuid());
         saveResume(resume, key);
         System.out.println("Resume " + resume.getUuid() + "  created.");
     }
 
     public void update(Resume resume) {
-        Object key = getNotExistResume (resume.getUuid());
+        Object key = getExistResume(resume.getUuid());
         updateResume(resume, key);
         System.out.println("Update " + resume.getUuid() + " completed.");
     }
 
     public Resume get(String uuid) {
-        Object key = getNotExistResume (uuid);
+        Object key = getExistResume(uuid);
         return getResume(key);
     }
 
     public void delete(String uuid) {
-        Object key = getNotExistResume (uuid);
+        Object key = getExistResume(uuid);
         deleteResume(key);
         System.out.println("Resume " + uuid + " deleted.");
     }
 
-    private Object getNotExistResume (String uuid) {
+    private Object getNotExistResume(String uuid) {
         Object key = getKey(uuid);
-        if (!existResume(key)) {
-            throw new NotExistStorageException(uuid);
+        if (existResume(key)) {
+            throw new ExistStorageException(uuid);
         }
         return key;
     }
 
-    private Object getExistResume (String uuid) {
+    private Object getExistResume(String uuid) {
         Object key = getKey(uuid);
-        if (existResume(key)) {
-            throw new ExistStorageException(uuid);
+        if (!existResume(key)) {
+            throw new NotExistStorageException(uuid);
         }
         return key;
     }
