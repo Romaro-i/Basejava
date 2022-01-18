@@ -34,7 +34,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     public void deleteResume(Object key) {
-        storage.remove((int)key);
+        storage.remove((int) key);
     }
 
     @Override
