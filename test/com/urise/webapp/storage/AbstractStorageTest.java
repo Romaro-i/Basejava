@@ -111,4 +111,3 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(size, storage.size());
     }
 }
-
