@@ -20,7 +20,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public void updateResume(Resume resume, Object key) {
-        storage.set(storage.indexOf(resume), resume);
+        storage.set((int) key, resume);
     }
 
     @Override
