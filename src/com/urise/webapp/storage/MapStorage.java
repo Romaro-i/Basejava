@@ -4,6 +4,7 @@ import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
@@ -33,12 +34,13 @@ public class MapStorage extends AbstractStorage {
     @Override
     public Resume[] getAll() {
         Resume[] values = new Resume[storage.size()];
-        int key = 0;
-        for (Map.Entry<String, Resume> mapEntry : storage.entrySet()) {
-            values[key] = mapEntry.getValue();
-            key++;
-    //      Arrays.sort(values);
+        Iterator<Resume> iterator = storage.values().iterator();
+        while(iterator.hasNext()) {
+            for (int i=0;i<storage.size();i++) {
+                values[i] = iterator.next();
+            }
         }
+        Arrays.sort(values);
         return values;
     }
 
