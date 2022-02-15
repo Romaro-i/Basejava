@@ -2,9 +2,6 @@ package com.urise.webapp.model;
 
 import java.util.UUID;
 
-/**
- * Initial resume class
- */
 public class Resume {
 
     private final String uuid;
@@ -27,9 +24,6 @@ public class Resume {
         this.uuid = uuid;
         this.fullName = fullName;
     }
-
-
-
 
     @Override
     public boolean equals(Object o) {
