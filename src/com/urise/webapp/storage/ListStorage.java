@@ -28,11 +28,6 @@ public class ListStorage extends AbstractStorage {
         return storage.get((Integer) key);
     }
 
-    @Override
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[0]);
-    }
-
     public void deleteResume(Object key) {
         storage.remove((int) key);
     }
@@ -55,5 +50,10 @@ public class ListStorage extends AbstractStorage {
     @Override
     protected boolean existResume(Object key) {
         return (Integer) key >= 0;
+    }
+
+    @Override
+    protected List<Resume> getArray() {
+        return new ArrayList<>(storage);
     }
 }
