@@ -11,23 +11,25 @@ public class Resume {
 
     private final String fullName;
 
-    public String getFullName() {
-        return fullName;
-    }
-
     public String getUuid() {
         return uuid;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public Resume(String fullName) {
+        this(UUID.randomUUID().toString(), fullName);
+    }
+
     public Resume(String uuid, String fullName) {
-        this.uuid = (UUID.randomUUID().toString());
+        this.uuid = uuid;
         this.fullName = fullName;
     }
 
-    public Resume(String uuid) {
-        this.uuid = uuid;
-        fullName = null;
-    }
+
+
 
     @Override
     public boolean equals(Object o) {
