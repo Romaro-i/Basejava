@@ -17,12 +17,12 @@ public class MapNameStorage extends AbstractStorage {
 
     @Override
     protected void saveResume(Resume resume, Object key) {
-        storage.put(resume.getUuid(), resume);
+        storage.put(resume.getFullName(), resume);
     }
 
     @Override
     protected void updateResume(Resume resume, Object key) {
-        storage.put(resume.getUuid(), resume);
+        storage.put(resume.getFullName(), resume);
     }
 
     @Override
