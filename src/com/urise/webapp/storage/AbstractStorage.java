@@ -19,17 +19,14 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract boolean existResume(Object key);
 
-    protected abstract List<Resume> getArray();
+    protected abstract List<Resume> getAll();
 
-    private static class ResumeNameComparator implements Comparator<Resume> {
-        @Override
-        public int compare(Resume o1, Resume o2) {
-            if (o1.getFullName() != null) {
-                return o1.getFullName().compareTo(o2.getFullName());
-            }
-            return o1.getUuid().compareTo(o2.getUuid());
+    private static final Comparator<Resume> ResumeComparator = (o1, o2) -> {
+        if (o1.getFullName() != null) {
+            return o1.getFullName().compareTo(o2.getFullName());
         }
-    }
+        return o1.getUuid().compareTo(o2.getUuid());
+    };
 
     public void save(Resume resume) {
         Object key = getNotExistResume(resume.getUuid());
@@ -49,8 +46,8 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public List<Resume> getAllSorted() {
-        List<Resume> list = getArray();
-        Arrays.sort(list, new ResumeNameComparator());
+        List<Resume> list = getAll();
+        list.sort(ResumeComparator);
         return list;
     }
 
