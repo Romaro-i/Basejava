@@ -13,6 +13,6 @@ public class AllStoregeTest {
                     MapStorageTest.class,
                     MapNameStorageTest.class,
             })
-    public class AllStorageTest {
+    public static class AllStorageTest {
     }
 }
