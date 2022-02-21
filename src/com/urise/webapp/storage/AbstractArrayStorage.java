@@ -52,7 +52,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected boolean existResume(Object key) {
+    protected boolean isExist(Object key) {
         return (Integer) key >= 0;
     }
 }
