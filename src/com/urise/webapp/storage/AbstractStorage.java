@@ -17,25 +17,11 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract Object getKey(String uuid);
 
-    protected abstract boolean existResume(Object key);
+    protected abstract boolean isExist(Object key);
 
     protected abstract List<Resume> getAll();
 
-    public static final Comparator<Resume> RESUME_COMPARATOR = new ResumeNameComparator().thenComparing(new ResumeUuidComparator());
-
-    private static class ResumeNameComparator implements Comparator<Resume> {
-        @Override
-        public int compare(Resume o1, Resume o2) {
-            return o1.getFullName().compareTo(o2.getFullName());
-        }
-    }
-
-    private static class ResumeUuidComparator implements Comparator<Resume> {
-        @Override
-        public int compare(Resume o1, Resume o2) {
-            return o1.getUuid().compareTo(o2.getUuid());
-        }
-    }
+    private static final Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid);
 
     public void save(Resume resume) {
         Object key = getNotExistResume(resume.getUuid());
@@ -68,7 +54,7 @@ public abstract class AbstractStorage implements Storage {
 
     private Object getNotExistResume(String uuid) {
         Object key = getKey(uuid);
-        if (existResume(key)) {
+        if (isExist(key)) {
             throw new ExistStorageException(uuid);
         }
         return key;
@@ -76,7 +62,7 @@ public abstract class AbstractStorage implements Storage {
 
     private Object getExistResume(String uuid) {
         Object key = getKey(uuid);
-        if (!existResume(key)) {
+        if (!isExist(key)) {
             throw new NotExistStorageException(uuid);
         }
         return key;
