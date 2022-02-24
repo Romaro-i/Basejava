@@ -26,13 +26,13 @@ public abstract class AbstractStorage implements Storage {
     public void save(Resume resume) {
         Object key = getNotExistResume(resume.getUuid());
         saveResume(resume, key);
-        System.out.println("Resume " + resume.getUuid() + "  created.");
+        System.out.println("Resume " + resume.getUuid() + " " + resume.getFullName() + "  created.");
     }
 
     public void update(Resume resume) {
         Object key = getExistResume(resume.getUuid());
         updateResume(resume, key);
-        System.out.println("Update " + resume.getUuid() + " completed.");
+        System.out.println("Update " + resume.getUuid() + " " + resume.getFullName() + " completed.");
     }
 
     public Resume get(String uuid) {
