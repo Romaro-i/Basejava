@@ -42,7 +42,7 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected Object getKey(String uuid) {
-        return uuid;
+        return getResume(uuid);
     }
 
     @Override
