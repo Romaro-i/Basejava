@@ -27,12 +27,13 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected Resume getResume(Object key) {
-        return storage.get((String) key);
+        return (Resume) key;
     }
 
     @Override
-    protected void deleteResume(Object key) {
-        storage.remove((String) key);
+    protected void deleteResume(Object resume) {
+        Resume key = (Resume) resume;
+        storage.remove(key.getUuid());
     }
 
     @Override
@@ -41,21 +42,17 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    protected Object getKey(String uuid) {
-        return uuid;
+    protected Object getKey(String key) {
+        return storage.get(key);
     }
 
     @Override
     protected boolean isExist(Object key) {
-        return storage.containsKey((String) key);
+        return storage.containsValue((Resume) key);
     }
 
     @Override
     protected List<Resume> getAll() {
         return new ArrayList<>(storage.values());
     }
-
-
-
-
 }
