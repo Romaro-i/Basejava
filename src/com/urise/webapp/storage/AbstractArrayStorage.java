@@ -8,7 +8,7 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int STORAGE_LIMIT = 10_000;
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
@@ -22,20 +22,20 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    public void saveResume(Resume resume, Object key) {
+    public void saveResume(Resume resume, Integer key) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow.", resume.getUuid());
         }
-        saveToStorage(resume, (int) key);
+        saveToStorage(resume, key);
         size++;
     }
 
-    public void updateResume(Resume resume, Object key) {
-        storage[(int) key] = resume;
+    public void updateResume(Resume resume, Integer key) {
+        storage[key] = resume;
     }
 
-    public Resume getResume(Object key) {
-        return storage[(int) key];
+    public Resume getResume(Integer key) {
+        return storage[key];
     }
 
     @Override
@@ -43,8 +43,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
-    public void deleteResume(Object key) {
-        deleteFromStorage((Integer) key);
+    public void deleteResume(Integer key) {
+        deleteFromStorage(key);
         size--;
     }
 
@@ -52,7 +52,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return size;
     }
 
-    protected boolean isExist(Object key) {
-        return (Integer) key >= 0;
+    protected boolean isExist(Integer key) {
+        return key >= 0;
     }
 }
