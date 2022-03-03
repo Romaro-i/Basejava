@@ -31,14 +31,12 @@ public abstract class AbstractStorage<SK> implements Storage {
         LOG.info("Save " + resume);
         SK key = getNotExistResume(resume.getUuid());
         saveResume(resume, key);
-        System.out.println("Resume " + resume.getUuid() + " " + resume.getFullName() + "  created.");
     }
 
     public void update(Resume resume) {
         LOG.info("Update " + resume);
         SK key = getExistResume(resume.getUuid());
         updateResume(resume, key);
-        System.out.println("Update " + resume.getUuid() + " " + resume.getFullName() + " completed.");
     }
 
     public Resume get(String uuid) {
@@ -57,7 +55,6 @@ public abstract class AbstractStorage<SK> implements Storage {
         LOG.info("Delete " + uuid);
         SK key = getExistResume(uuid);
         deleteResume(key);
-        System.out.println("Resume " + uuid + " deleted.");
     }
 
     private SK getNotExistResume(String uuid) {
