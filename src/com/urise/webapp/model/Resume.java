@@ -1,5 +1,9 @@
 package com.urise.webapp.model;
 
+import sun.swing.SwingUtilities2;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,6 +19,10 @@ public class Resume {
     private String contact;
 
     private String section;
+
+    Map<ContactType, String> contacts = new HashMap<>();
+
+    Map<SectionType, AbstractSection> sections = new HashMap<>();
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);

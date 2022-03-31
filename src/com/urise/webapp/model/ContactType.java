@@ -1,6 +1,6 @@
 package com.urise.webapp.model;
 
-public enum Contact {
+public enum ContactType {
     PHONE("Тел."),
     MOBILE("Мобильный"),
     HOME_PHONE("Домашний тел."),
@@ -11,13 +11,14 @@ public enum Contact {
     STATCKOVERFLOW("Профиль Stackoverflow"),
     HOME_PAGE("Домашняя страница");
 
-    private String type;
+    private final String contact;
 
-    Contact(String type) {
-        this.type = type;
+    ContactType(String contact) {
+        this.contact = contact;
     }
 
-    public String getType() {
-        return type;
+    public String getContact() {
+        return contact;
     }
+
 }

@@ -1,5 +1,8 @@
 package com.urise.webapp.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum SectionType {
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),
@@ -8,13 +11,13 @@ public enum SectionType {
     EXPERIENCE("Опыт работы"),
     EDUCATION("Образование");
 
-    private String type;
+    private String title;
 
-    SectionType(String type) {
-        this.type = type;
+    SectionType(String title) {
+        this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 }
