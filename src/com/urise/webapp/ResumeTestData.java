@@ -33,12 +33,15 @@ public class ResumeTestData {
 
         ARRAY_STORAGE.update(resume);
 
+        System.out.println(personal.getText());
+
         String text1 = "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. " +
                 "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.";
         value.add(text1);
         resume.getSections().put(SectionType.ACHIEVEMENT, achivement);
 
         ARRAY_STORAGE.update(resume);
-        System.out.println(ARRAY_STORAGE.getAllSorted());
+
+        System.out.println(personal.getText());
     }
 }
