@@ -14,9 +14,9 @@ public class Resume {
 
     private String fullName;
 
-    private final Map<ContactType, String> contacts = new HashMap<>();
+    private Map<ContactType, String> contacts = new HashMap<>();
 
-    private final Map<SectionType, AbstractSection> sections = new HashMap<>();
+    private Map<SectionType, AbstractSection> sections = new HashMap<>();
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -37,25 +37,25 @@ public class Resume {
         return fullName;
     }
 
-//    public void setFullName(String fullName) {
-//        this.fullName = fullName;
-//    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public Map<ContactType, String> getContacts() {
         return contacts;
     }
-//
-//    public void setContacts(String contacts) {
-//        this.contacts = contacts;
-//    }
+
+    public void setContacts(Map<ContactType, String> contacts) {
+        this.contacts = contacts;
+    }
 
     public Map<SectionType, AbstractSection> getSections() {
         return sections;
     }
-//
-//    public void setSectionType(String section) {
-//        this.section = section;
-//    }
+
+    public void setSectionType(Map<SectionType, AbstractSection> sections) {
+        this.sections = sections;
+    }
 
     public String getResume() {
         return toString();
@@ -68,10 +68,10 @@ public class Resume {
 
         Resume resume = (Resume) o;
 
-        if (uuid != null ? !uuid.equals(resume.uuid) : resume.uuid != null) return false;
-        if (fullName != null ? !fullName.equals(resume.fullName) : resume.fullName != null) return false;
-        if (contacts != null ? !contacts.equals(resume.contacts) : resume.contacts != null) return false;
-        return sections != null ? sections.equals(resume.sections) : resume.sections == null;
+        if (!Objects.equals(uuid, resume.uuid)) return false;
+        if (!Objects.equals(fullName, resume.fullName)) return false;
+        if (!Objects.equals(contacts, resume.contacts)) return false;
+        return Objects.equals(sections, resume.sections);
     }
 
     @Override
