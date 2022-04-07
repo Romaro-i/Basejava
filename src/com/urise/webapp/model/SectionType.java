@@ -1,8 +1,5 @@
 package com.urise.webapp.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public enum SectionType {
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),

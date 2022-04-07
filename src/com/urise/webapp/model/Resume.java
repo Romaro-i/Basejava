@@ -1,7 +1,5 @@
 package com.urise.webapp.model;
 
-import sun.swing.SwingUtilities2;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,13 +14,9 @@ public class Resume {
 
     private String fullName;
 
-    private String contact;
+    private final Map<ContactType, String> contacts = new HashMap<>();
 
-    private String section;
-
-    Map<ContactType, String> contacts = new HashMap<>();
-
-    Map<SectionType, AbstractSection> sections = new HashMap<>();
+    private final Map<SectionType, AbstractSection> sections = new HashMap<>();
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -43,43 +37,59 @@ public class Resume {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+//    public void setFullName(String fullName) {
+//        this.fullName = fullName;
+//    }
 
-    public String getContact() {
-        return contact;
+    public Map<ContactType, String> getContacts() {
+        return contacts;
     }
+//
+//    public void setContacts(String contacts) {
+//        this.contacts = contacts;
+//    }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public Map<SectionType, AbstractSection> getSections() {
+        return sections;
     }
+//
+//    public void setSectionType(String section) {
+//        this.section = section;
+//    }
 
-    public String getSection() {
-        return section;
-    }
-
-    public void setSectionType(String section) {
-        this.section = section;
+    public String getResume() {
+        return toString();
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Resume resume = (Resume) o;
-        return uuid.equals(resume.uuid) && fullName.equals(resume.fullName);
+
+        if (uuid != null ? !uuid.equals(resume.uuid) : resume.uuid != null) return false;
+        if (fullName != null ? !fullName.equals(resume.fullName) : resume.fullName != null) return false;
+        if (contacts != null ? !contacts.equals(resume.contacts) : resume.contacts != null) return false;
+        return sections != null ? sections.equals(resume.sections) : resume.sections == null;
     }
 
     @Override
     public int hashCode() {
-        int result = uuid.hashCode();
-        result = 31 * result + fullName.hashCode();
+        int result = uuid != null ? uuid.hashCode() : 0;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
+        result = 31 * result + (sections != null ? sections.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return uuid + " " + fullName;
+        return "Resume{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", contacts=" + contacts +
+                ", sections=" + sections +
+                '}';
     }
 }

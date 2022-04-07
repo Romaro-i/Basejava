@@ -1,19 +1,21 @@
 package com.urise.webapp.model;
 
+import java.util.List;
+
 public class TextSection extends AbstractSection {
 
-    private  String text;
+    private final String value;
+    private List<String> text;
 
-    public TextSection (String text) {
-        this.text = text;
+    public TextSection(String value) {
+        this.value = value;
     }
 
-    public String getText() {
+    public List<String> getText() {
         return text;
     }
 
-    @Override
-    public String toString() {
-        return getText();
+    public void setText(List<String> text) {
+        this.text = text;
     }
 }

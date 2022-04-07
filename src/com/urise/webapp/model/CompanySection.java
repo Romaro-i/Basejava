@@ -1,14 +1,17 @@
 package com.urise.webapp.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CompanySection extends AbstractSection {
 
     private final String companyName;
     private final String specialization;
     private final String duties;
+    private List<String> textSection;
     static LocalDate dateBegin;
     static LocalDate dateOver;
+
 
     public CompanySection(LocalDate dateBegin, LocalDate dateOver, String companyName, String specialization, String duties) {
         CompanySection.dateBegin = dateBegin;
@@ -18,12 +21,17 @@ public class CompanySection extends AbstractSection {
         this.duties = duties;
     }
 
+
     public String getCompanyName() {
         return companyName;
     }
 
     public String getSpecialization() {
         return specialization;
+    }
+
+    public String getDuties() {
+        return duties;
     }
 
     public LocalDate getDateBegin() {
@@ -34,9 +42,6 @@ public class CompanySection extends AbstractSection {
         return dateOver;
     }
 
-    public String getDuties() {
-        return duties;
-    }
 
     @Override
     public String toString() {
