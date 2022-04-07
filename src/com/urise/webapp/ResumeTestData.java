@@ -35,9 +35,9 @@ public class ResumeTestData {
 
         System.out.println(personal.getText());
 
-        String text1 = "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. " +
+        text = "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. " +
                 "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.";
-        value.add(text1);
+        value.add(text);
         resume.getSections().put(SectionType.ACHIEVEMENT, achivement);
 
         ARRAY_STORAGE.update(resume);
