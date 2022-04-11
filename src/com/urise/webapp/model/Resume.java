@@ -1,9 +1,6 @@
 package com.urise.webapp.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Initial resume class
@@ -12,11 +9,12 @@ public class Resume {
 
     private final String uuid;
 
-    private String fullName;
+    private final String fullName;
 
-    private Map<ContactType, String> contacts = new HashMap<>();
+    private EnumMap contacts = new EnumMap<ContactType, String>(ContactType.class);
 
-    private Map<SectionType, AbstractSection> sections = new HashMap<>();
+    private final EnumMap sections = new EnumMap<SectionType, AbstractSection>(SectionType.class);
+
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -37,29 +35,24 @@ public class Resume {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Map<ContactType, String> getContacts() {
+    public EnumMap<ContactType, String> getContacts() {
         return contacts;
     }
 
-    public void setContacts(Map<ContactType, String> contacts) {
-        this.contacts = contacts;
-    }
-
-    public Map<SectionType, AbstractSection> getSections() {
+    public EnumMap<SectionType, AbstractSection> getSections() {
         return sections;
     }
 
-    public void setSectionType(Map<SectionType, AbstractSection> sections) {
-        this.sections = sections;
+    public void setContacts( ContactType contacts, String value) {
+    }
+
+    public void setSections( SectionType sections, AbstractSection value) {
     }
 
     public String getResume() {
         return toString();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -78,8 +71,8 @@ public class Resume {
     public int hashCode() {
         int result = uuid != null ? uuid.hashCode() : 0;
         result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
-        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
-        result = 31 * result + (sections != null ? sections.hashCode() : 0);
+        result = 31 * result + contacts.hashCode();
+        result = 31 * result + sections.hashCode();
         return result;
     }
 
