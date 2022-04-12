@@ -20,5 +20,4 @@ public enum ContactType {
     public String getContact() {
         return contact;
     }
-
 }

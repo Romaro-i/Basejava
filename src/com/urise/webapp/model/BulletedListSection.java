@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BulletedListSection extends AbstractSection {
 
-    private List<String> text;
+    private final List<String> text;
 
     public BulletedListSection(List<String> text) {
         this.text = text;
@@ -13,4 +13,5 @@ public class BulletedListSection extends AbstractSection {
     public List<String> getText() {
         return text;
     }
+
 }

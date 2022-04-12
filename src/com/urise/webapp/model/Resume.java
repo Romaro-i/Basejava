@@ -11,9 +11,9 @@ public class Resume {
 
     private final String fullName;
 
-    private EnumMap contacts = new EnumMap<ContactType, String>(ContactType.class);
+    private final EnumMap<ContactType, String> contacts = new EnumMap<>(ContactType.class);
 
-    private final EnumMap sections = new EnumMap<SectionType, AbstractSection>(SectionType.class);
+    private final EnumMap<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
 
 
     public Resume(String fullName) {
@@ -44,9 +44,11 @@ public class Resume {
     }
 
     public void setContacts( ContactType contacts, String value) {
+        getContacts().put(contacts, value);
     }
 
     public void setSections( SectionType sections, AbstractSection value) {
+        getSections().put(sections, value);
     }
 
     public String getResume() {
